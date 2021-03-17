@@ -1475,5 +1475,35 @@ export const Localisations = {
     nl: 'Tekst invoeren',
     pl: 'Wprowadź tekst',
     hb: 'הזן טקסט'
+  },
+  PROGRESS_REPORT_TITLE: {
+    da: '',
+    de: '',
+    en: 'Progress Report',
+    es: '',
+    it: '',
+    nl: '',
+    pl: '',
+    hb: ''
+  },
+  PROGRESS_REPORT_NO_RESULT: {
+    da: '',
+    de: '',
+    en: 'No result!',
+    es: '',
+    it: '',
+    nl: '',
+    pl: '',
+    hb: ''
+  },
+  PROGRESS_REPORT_IN_FIRST_WEEK: {
+    da: '',
+    de: '',
+    en: 'The first report will be available after the end of first week on',
+    es: '',
+    it: '',
+    nl: '',
+    pl: '',
+    hb: ''
   }
 }

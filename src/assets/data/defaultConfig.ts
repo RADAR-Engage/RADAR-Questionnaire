@@ -48,7 +48,8 @@ export const DefaultOnDemandAssessmentLabel = JSON.stringify(
 
 // *The Default endpoint where the RADAR-base platform is hosted
 export const DefaultEndPoint: string =
-  'https://radar-cns-platform.rosalind.kcl.ac.uk'
+  'https://radar-test.thehyve.net'
+  // 'https://radar-cns-platform.rosalind.kcl.ac.uk'
 
 export const DefaultManagementPortalURI = '/managementportal'
 export const DefaultRefreshTokenURI = '/oauth/token'
@@ -269,3 +270,9 @@ export const DefaultSettingsSupportedLanguages: LanguageSetting[] = [
 ]
 
 export const DefaultQuestionsHidden = '{}'
+
+export const DefaultProgressConfig = {
+  description: 'Your weekly progress.',
+  enabled: 'true'
+}
+

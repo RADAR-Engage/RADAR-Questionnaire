@@ -1,0 +1,32 @@
+.chart-wrapper {
+  position: relative;
+  overflow-x: auto;
+  margin: 16px;
+  //padding: 8px;
+  background: #fff;
+  //#25414e;////#25414e;//rgba(0, 0, 0, 0.4);//#fff;
+}
+
+.empty-chart-text {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  background: rgba(#000, 0.8);
+  color: black;
+  text-align: center;
+}
+
+.chart-line {
+  padding: 8px;
+}
+//.chart-wrapper {
+//  display: grid;
+//  margin: 16px;
+//  min-width: calc(100% - 32px);
+//  background-color: #aaa;
+//}
