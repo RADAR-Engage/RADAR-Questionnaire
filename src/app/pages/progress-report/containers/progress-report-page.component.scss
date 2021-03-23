@@ -1,4 +1,32 @@
 page-progress-report {
+  ion-header .toolbar-background {
+    background-color: $cl-secondary;
+  }
+
+  .toolbar-title {
+    color: $cl-font;
+  }
+
+  .bar-button {
+    color: $cl-font;
+  }
+
+  ion-footer .toolbar-background {
+    background-color: $cl-danger-60;
+  }
+
+  ion-buttons {
+    margin: 8px 16px;
+  }
+
+  .bt--full {
+    width: 100%;
+  }
+
+  .bt--full:active {
+    background-color: $cl-primary-80;
+  }
+
   ion-spinner * {
     margin-right: auto;
     margin-left: auto;
