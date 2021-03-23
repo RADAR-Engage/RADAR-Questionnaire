@@ -17,7 +17,9 @@ export const lineColors = ["#3c6f82"]
 ```
 
 ##Test
-`progress-report/services/progress-report.service.ts`
+For testing with mock data change these files:
+
+1) `progress-report/services/progress-report.service.ts`
 
 ```ts
 getChartTasks(){
@@ -40,6 +42,18 @@ getChartTasks(){
     ...
   }
 ```
+
+2) `progress-report/components/progress-report-chart/progress-report-chart.component.ts`
+
+```ts
+isFirstWeekPassed(){
+    return getMockCurrentTime() >= moment(this.referenceDate).add(1,'week')
+    // return moment() >= moment(this.referenceDate).add(1,'week') //true // !chartData.length
+  }
+```
+
+3) `progress-report/components/progress-report-chart/mock-tasks.ts`
+
 ##Translations
 `assets/data/localisations.ts`
 ```ts

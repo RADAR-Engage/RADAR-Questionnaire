@@ -13,10 +13,10 @@ export class ProgressReportService {
 
   getChartTasks(){
     return Promise.all([
-      this.storageService.get(StorageKeys.SCHEDULE_TASKS),
-      this.storageService.get(StorageKeys.REFERENCEDATE)
-      // getMockTasks(),
-      // getMockReferenceDate(),
+      // this.storageService.get(StorageKeys.SCHEDULE_TASKS),
+      // this.storageService.get(StorageKeys.REFERENCEDATE)
+      getMockTasks(),
+      getMockReferenceDate(),
     ]).then(([tasks, referenceDate]) => {
       console.log(tasks)
       console.log(moment(referenceDate).format("YYYY-MM-DD HH:mm"))
@@ -35,8 +35,8 @@ export class ProgressReportService {
       }
     });
 
-    const date = moment()
-    // const date = getMockCurrentTime()
+    // const date = moment()
+    const date = getMockCurrentTime()
 
     const startOfWeek = date.startOf("week")
 
@@ -44,6 +44,7 @@ export class ProgressReportService {
 
     tasks.map(task => {
       if((task.timestamp + task.completionWindow) < startOfWeek) {
+      // if((task.timestamp) < startOfWeek) {
         const taskName = "merged"
         const taskByName = result[taskName]
         const intervalRef = moment(task.timestamp).startOf("week").valueOf()

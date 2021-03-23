@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core'
 import * as moment from 'moment'
 import {ChartOptions} from "../../models/chart";
 import {lineColors, markerColors, markerStroke} from "./chart-styles";
+import {getMockCurrentTime} from "./mock-tasks";
 
 @Component({
   selector: 'progress-report-chart',
@@ -201,10 +202,12 @@ export class ProgressReportChartComponent implements OnInit {
   }
 
   isFirstWeekPassed(){
-    return moment() > moment(this.referenceDate).add(1,'week') //true // !chartData.length
+    return getMockCurrentTime() >= moment(this.referenceDate).add(1,'week')
+    // return moment() >= moment(this.referenceDate).add(1,'week')
   }
 
   isChartEmpty(){
+    if(!this.chartData) return false
     return this.chartData.length == 0
   }
 }
