@@ -1,8 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core'
 import * as moment from 'moment'
 import {ChartOptions} from "../../models/chart";
-import {lineColors, markerColors, markerStroke} from "./chart-styles";
+import {lineColors, markerStroke} from "./chart-styles";
 import {getMockCurrentTime} from "./mock-tasks";
+
+export const enum markerColors {
+  NOT_COMPLETED = "#D87476",
+  COMPLETED = "#9CB229",
+  PARTIALLY_COMPLETED = "#C8C9C8"
+}
 
 @Component({
   selector: 'progress-report-chart',
@@ -60,9 +66,9 @@ export class ProgressReportChartComponent implements OnInit {
         labels: {
           show: true,
           rotate: -45,
-          formatter: (val) => {
-            return this.getWeekNumberOfProtocol(val)
-          }
+          // formatter: (val) => {
+          //   return this.getWeekNumberOfProtocol(val)
+          // }
         },
         title: {
           text: "Week",
@@ -121,6 +127,37 @@ export class ProgressReportChartComponent implements OnInit {
   }
 
   convertTasksToChartData(tasks){
+    const output = []
+    const data1 = []
+    for (const key in tasks) {
+      if(tasks.hasOwnProperty(key)){
+        let y = null
+        if(tasks[key].total > 0 && tasks[key].total == tasks[key].availableTotal){
+          y = 100 * tasks[key].completed / tasks[key].total
+          console.log(y)
+          if(y != 0 && y != 100){
+            y = 50
+          }
+          console.log(y)
+        }
+        let fillColor = markerColors.PARTIALLY_COMPLETED
+        if(y == 0){
+          fillColor = markerColors.NOT_COMPLETED
+        }else if(y == 100){
+          fillColor =  markerColors.COMPLETED
+        }
+        data1.push({
+          x: key,
+          y: y,
+          fillColor: fillColor
+        })
+      }
+    }
+    output.push({name: 'result', data: data1})
+    console.log(output)
+    return output
+
+
     // if want to show null between weeks and at the beginning
     /*
         const weeks = [];
@@ -202,11 +239,13 @@ export class ProgressReportChartComponent implements OnInit {
   }
 
   isFirstWeekPassed(){
+    return true
     return getMockCurrentTime() >= moment(this.referenceDate).add(1,'week')
     // return moment() >= moment(this.referenceDate).add(1,'week')
   }
 
   isChartEmpty(){
+    return false
     if(!this.chartData) return false
     return this.chartData.length == 0
   }

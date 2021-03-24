@@ -43,7 +43,6 @@ export class ProgressReportPageComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     console.log("destroyed")
-    //this.usage.
   }
 
   ionViewDidLoad() {}

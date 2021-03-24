@@ -12,8 +12,8 @@ import {ProgressReportPageComponent} from "../../pages/progress-report/container
   template: '<ion-nav *ngIf="isAppInitialized" [root]="rootPage"></ion-nav>'
 })
 export class AppComponent {
-  // rootPage = ProgressReportPageComponent
-  rootPage = SplashPageComponent
+  rootPage = ProgressReportPageComponent
+  // rootPage = SplashPageComponent
   isAppInitialized: boolean
 
   constructor(

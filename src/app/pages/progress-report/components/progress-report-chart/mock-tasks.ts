@@ -2,14 +2,14 @@ import * as moment from 'moment'
 
 const currentTime = "2021-03-23 00:00"
 
-const referenceDate = "2021-01-23 00:00"
+const referenceDate = "2021-03-23 00:00"
 
 const mockTasks = [
   {
     name: 'PHQ8',
     completionWindow: 86400000,
     repeatedQuestionnaires: [
-      {date: "2021-03-23 09:30", completed: true},
+      {date: "2021-03-23 09:30", completed: false},
       {date: "2021-03-30 09:30", completed: false},
       {date: "2021-04-06 09:30", completed: false},
       {date: "2021-04-13 09:30", completed: false},
@@ -45,7 +45,7 @@ const mockTasks = [
     name: 'AUDIO',
     completionWindow: 86400000,
     repeatedQuestionnaires: [
-      {date: "2021-03-23 05:45", completed: false},
+      {date: "2021-03-23 05:45", completed: true},
       {date: "2021-03-30 05:45", completed: false},
       {date: "2021-04-06 05:45", completed: false},
       {date: "2021-04-13 05:45", completed: false},
