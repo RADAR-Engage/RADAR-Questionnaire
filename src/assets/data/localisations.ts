@@ -1477,33 +1477,53 @@ export const Localisations = {
     hb: 'הזן טקסט'
   },
   PROGRESS_REPORT_TITLE: {
-    da: '',
-    de: '',
+    da: 'Statusrapporten',
+    de: 'Fortschrittsbericht',
     en: 'Progress Report',
-    es: '',
-    it: '',
-    nl: '',
-    pl: '',
-    hb: ''
+    es: 'Informe de progreso',
+    it: 'Rapporto sullo stato di avanzamento',
+    nl: 'Voortgangsrapport',
+    pl: 'Status postępu',
+    hb: 'דו"ח התקדמות'
   },
   PROGRESS_REPORT_NO_RESULT: {
-    da: '',
-    de: '',
+    da: 'Intet resultat!',
+    de: 'Kein Ergebnis!',
     en: 'No result!',
-    es: '',
-    it: '',
-    nl: '',
-    pl: '',
-    hb: ''
+    es: '¡Sin resultados!',
+    it: 'Nessun risultato!',
+    nl: 'Geen resultaat!',
+    pl: 'Brak wyników!',
+    hb: 'אין תוצאה!'
   },
-  PROGRESS_REPORT_IN_FIRST_WEEK: {
-    da: '',
-    de: '',
-    en: 'The first report will be available after the end of first week on',
-    es: '',
-    it: '',
-    nl: '',
-    pl: '',
-    hb: ''
+  PROGRESS_REPORT_WAITING: {
+    da: 'Den første rapport vil være tilgængelig den',
+    de: 'Der erste Bericht wird am verfügbar sein',
+    en: 'The first report will be available on',
+    es: 'El primer informe estará disponible el',
+    it: 'Il primo rapporto sarà disponibile su',
+    nl: 'Het eerste rapport is beschikbaar op',
+    pl: 'Pierwszy raport będzie dostępny w dniu',
+    hb: 'הדו"ח הראשון יהיה זמין בתאריך'
+  },
+  PROGRESS_REPORT_WAITING_TODAY: {
+    da: 'Den første rapport vil være tilgængelig i dag kl',
+    de: 'Der erste Bericht wird heute unter verfügbar sein',
+    en: 'The first report will be available today at',
+    es: 'El primer informe estará disponible hoy en',
+    it: 'Il primo rapporto sarà disponibile oggi su',
+    nl: 'Het eerste rapport is vandaag beschikbaar op',
+    pl: 'Pierwszy raport będzie dostępny dzisiaj o godz',
+    hb: 'הדו"ח הראשון יהיה זמין היום ב'
+  },
+  PROGRESS_REPORT_WAITING_TOMORROW: {
+    da: 'Den første rapport vil være tilgængelig i morgen kl',
+    de: 'Der erste Bericht wird morgen um verfügbar sein',
+    en: 'The first report will be available tomorrow at',
+    es: 'El primer informe estará disponible mañana a las',
+    it: 'Il primo rapporto sarà disponibile domani alle',
+    nl: 'Het eerste rapport is morgen beschikbaar op',
+    pl: 'Pierwszy raport będzie dostępny jutro o godz',
+    hb: 'הדו"ח הראשון יהיה זמין מחר ב'
   }
 }

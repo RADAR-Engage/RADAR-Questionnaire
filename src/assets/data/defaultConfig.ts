@@ -272,7 +272,9 @@ export const DefaultSettingsSupportedLanguages: LanguageSetting[] = [
 export const DefaultQuestionsHidden = '{}'
 
 export const DefaultProgressConfig = {
-  description: 'Your weekly progress.',
+  description:
+    'This graph shows your weekly completion rates for app tasks. It updates the day after your tasks are due.\n\n' +
+    'Fitbit data is available on the Fitbit app. Have you synced recently?',
   enabled: 'true'
 }
 

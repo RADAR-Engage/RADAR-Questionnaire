@@ -1,6 +1,8 @@
 import * as moment from 'moment'
 
-const currentTime = "2021-03-23 00:00"
+const currentTime = "2021-03-25 08:00"
+
+const loginDate = "2021-03-23 08:45"
 
 const referenceDate = "2021-03-23 00:00"
 
@@ -27,36 +29,36 @@ const mockTasks = [
     name: 'RSES',
     completionWindow: 86400000,
     repeatedQuestionnaires: [
-      {date: "2021-03-23 10:00", completed: true},
-      {date: "2021-03-30 10:00", completed: false},
-      {date: "2021-04-06 10:00", completed: false},
-      {date: "2021-04-13 10:00", completed: false},
-      {date: "2021-04-20 10:00", completed: false},
-      {date: "2021-04-27 10:00", completed: false},
-      {date: "2021-05-04 10:00", completed: false},
-      {date: "2021-05-11 10:00", completed: false},
-      {date: "2021-05-18 10:00", completed: false},
-      {date: "2021-05-25 10:00", completed: false},
-      {date: "2021-06-01 10:00", completed: false},
-      {date: "2021-06-08 10:00", completed: false},
+      // {date: "2021-03-23 10:00", completed: true},
+      // {date: "2021-03-30 10:00", completed: false},
+      // {date: "2021-04-06 10:00", completed: false},
+      // {date: "2021-04-13 10:00", completed: false},
+      // {date: "2021-04-20 10:00", completed: false},
+      // {date: "2021-04-27 10:00", completed: false},
+      // {date: "2021-05-04 10:00", completed: false},
+      // {date: "2021-05-11 10:00", completed: false},
+      // {date: "2021-05-18 10:00", completed: false},
+      // {date: "2021-05-25 10:00", completed: false},
+      // {date: "2021-06-01 10:00", completed: false},
+      // {date: "2021-06-08 10:00", completed: false},
     ]
   },
   {
     name: 'AUDIO',
     completionWindow: 86400000,
     repeatedQuestionnaires: [
-      {date: "2021-03-23 05:45", completed: true},
-      {date: "2021-03-30 05:45", completed: false},
-      {date: "2021-04-06 05:45", completed: false},
-      {date: "2021-04-13 05:45", completed: false},
-      {date: "2021-04-20 05:45", completed: false},
-      {date: "2021-04-27 05:45", completed: false},
-      {date: "2021-05-04 05:45", completed: false},
-      {date: "2021-05-11 05:45", completed: false},
-      {date: "2021-05-18 05:45", completed: false},
-      {date: "2021-05-25 05:45", completed: false},
-      {date: "2021-06-01 05:45", completed: false},
-      {date: "2021-06-08 05:45", completed: false},
+      // {date: "2021-03-23 05:45", completed: true},
+      // {date: "2021-03-30 05:45", completed: false},
+      // {date: "2021-04-06 05:45", completed: false},
+      // {date: "2021-04-13 05:45", completed: false},
+      // {date: "2021-04-20 05:45", completed: false},
+      // {date: "2021-04-27 05:45", completed: false},
+      // {date: "2021-05-04 05:45", completed: false},
+      // {date: "2021-05-11 05:45", completed: false},
+      // {date: "2021-05-18 05:45", completed: false},
+      // {date: "2021-05-25 05:45", completed: false},
+      // {date: "2021-06-01 05:45", completed: false},
+      // {date: "2021-06-08 05:45", completed: false},
     ]
   }
 ]
@@ -80,6 +82,12 @@ const createTasksFromMockTasks = (()=>{
 export const getMockReferenceDate = (() => {
   return new Promise((resolve , reject) => {
     resolve(moment(referenceDate).valueOf())
+  });
+})
+
+export const getMockLoginDate = (() => {
+  return new Promise((resolve , reject) => {
+    resolve(moment(loginDate).valueOf())
   });
 })
 

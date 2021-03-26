@@ -1,20 +1,23 @@
-<div class="chart-wrapper">
-  <div class="empty-chart-text" *ngIf="!isFirstWeekPassed() || isChartEmpty()">
-    <p *ngIf="!isFirstWeekPassed()">{{'PROGRESS_REPORT_IN_FIRST_WEEK' | translate}}<br>{{getReportStartDate()}}</p>
-    <p *ngIf="isFirstWeekPassed()">{{'PROGRESS_REPORT_NO_RESULT' | translate}}</p>
+<div class="chart-container">
+  <div class="inner-chart-wrapper">
+    <div class="empty-chart-text" *ngIf="showWaitingForFirstReport || showNoResult">
+      <p *ngIf="showWaitingForFirstReport">{{firstReportAvailableDate}}</p>
+      <p *ngIf="showNoResult">{{'PROGRESS_REPORT_NO_RESULT' | translate}}</p>
+    </div>
+    <div class="chart-line">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [dataLabels]="chartOptions.dataLabels"
+        [colors]="chartOptions.colors"
+        [fill]="chartOptions.fill"
+        [markers]="chartOptions.markers"
+        [stroke]="chartOptions.stroke"
+        [tooltip]="chartOptions.tooltip"
+      ></apx-chart>
+    </div>
   </div>
-  <div class="chart-line">
-    <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [xaxis]="chartOptions.xaxis"
-      [yaxis]="chartOptions.yaxis"
-      [dataLabels]="chartOptions.dataLabels"
-      [colors]="chartOptions.colors"
-      [fill]="chartOptions.fill"
-      [markers]="chartOptions.markers"
-      [stroke]="chartOptions.stroke"
-      [tooltip]="chartOptions.tooltip"
-    ></apx-chart>
-  </div>
+  <p class="x-label">{{xAxisTitle}}</p>
 </div>

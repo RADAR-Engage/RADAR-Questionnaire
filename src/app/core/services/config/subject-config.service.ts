@@ -12,6 +12,7 @@ import { StorageKeys } from '../../../shared/enums/storage'
 import { User } from '../../../shared/models/user'
 import { StorageService } from '../storage/storage.service'
 import { TokenService } from '../token/token.service'
+import * as moment from 'moment'
 
 @Injectable()
 export class SubjectConfigService {
@@ -22,7 +23,8 @@ export class SubjectConfigService {
     PROJECTNAME: StorageKeys.PROJECTNAME,
     SOURCEID: StorageKeys.SOURCEID,
     ENROLMENTDATE: StorageKeys.ENROLMENTDATE,
-    BASE_URI: StorageKeys.BASE_URI
+    BASE_URI: StorageKeys.BASE_URI,
+    LOGINDATE: StorageKeys.LOGINDATE
   }
 
   constructor(
@@ -39,7 +41,8 @@ export class SubjectConfigService {
       this.setSourceID(user.sourceId),
       this.setEnrolmentDate(user.enrolmentDate),
       this.setBaseUrl(user.baseUrl),
-      this.setParticipantAttributes(user.attributes)
+      this.setParticipantAttributes(user.attributes),
+      this.setLoginDate(moment().valueOf())
     ])
   }
 
@@ -60,6 +63,10 @@ export class SubjectConfigService {
 
   setEnrolmentDate(date) {
     return this.storage.set(this.SUBJECT_CONFIG_STORE.ENROLMENTDATE, date)
+  }
+
+  setLoginDate(date){
+    return this.storage.set(this.SUBJECT_CONFIG_STORE.LOGINDATE, date)
   }
 
   setProjectName(name) {
