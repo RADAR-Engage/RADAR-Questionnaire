@@ -32,7 +32,7 @@ export class ProgressReportChartComponent implements OnInit {
     const {weeklyData, referenceDate, firstReportAvailableDate} = this.data
     this.showNoResult = !weeklyData
     this.firstReportAvailableDate = this.getFirstReportAvailableText(firstReportAvailableDate)
-    this.showWaitingForFirstReport = firstReportAvailableDate > this.progressReport.currentDate.valueOf()
+    this.showWaitingForFirstReport = firstReportAvailableDate > this.progressReport.getCurrentDate().valueOf()
     this.referenceDate = referenceDate
     this.chartData = this.convertWeeklyDataToChartData(weeklyData)
     this.initCharts()
@@ -74,15 +74,15 @@ export class ProgressReportChartComponent implements OnInit {
     return numberOfItems > chart.xAxisMaxNumberOfItem ? numberOfItems * 100 / chart.xAxisMaxNumberOfItem + '%' : '100%'
   }
 
-  private getFirstReportAvailableText(date) {
+  private getFirstReportAvailableText(date: number) {
     let result = this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING) + " " +
       moment(date).format('MMM DD, YYYY HH:mm')
-    const getDiff = this.progressReport.currentDate.startOf('day')
+    const diff = this.progressReport.getCurrentDate().startOf('day')
       .diff(moment(date).startOf('day'), 'days')
-    if(getDiff == 0){
+    if(diff == 0){
       result = this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING_TODAY) + " " +
         moment(date).format('HH:mm')
-    }else if(getDiff == -1){
+    }else if(diff == -1){
       result = this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING_TOMORROW) + " " +
         moment(date).format('HH:mm')
     }
