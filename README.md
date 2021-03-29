@@ -136,7 +136,7 @@ Certain values can be overriden using Firebase Remote Config. Specifically, the 
 | `platform_instance`           | Title of RADAR Base / platform instance                                                 | `RADAR-CNS`                                                                                                      |
 | `participant_attribute_order` | Map that specifies the order in which the attributes are matched with the protocol path | `{Human-readable-identifier: -1}`                                                                                |
 | `progress_report_enabled`     | Enable/disable Progress Report Page                                                     | `true`                                                                                                           |
-| `progress_report_description` | Description for the Progress Report Page                                                | `Your weekly progress.`                                                                                          |
+| `progress_report_description` | Description for the Progress Report Page                                                | `This graph shows your weekly completion rates for app tasks. It updates the day after your tasks are due.\nFitbit data is available on the Fitbit app. Have you synced recently?`                                                                                          |
 
 #### Conditions
 

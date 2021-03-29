@@ -6,13 +6,11 @@ import { Platform } from 'ionic-angular'
 
 import { SplashPageComponent } from '../../pages/splash/containers/splash-page.component'
 import { NotificationService } from '../services/notifications/notification.service'
-import {ProgressReportPageComponent} from "../../pages/progress-report/containers/progress-report-page.component";
 
 @Component({
   template: '<ion-nav *ngIf="isAppInitialized" [root]="rootPage"></ion-nav>'
 })
 export class AppComponent {
-  // rootPage = ProgressReportPageComponent
   rootPage = SplashPageComponent
   isAppInitialized: boolean
 
