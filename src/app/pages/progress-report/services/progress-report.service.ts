@@ -1,15 +1,15 @@
-import {Injectable} from "@angular/core"
+import { Injectable } from '@angular/core'
 import * as moment from 'moment'
-import {StorageService} from "../../../core/services/storage/storage.service"
-import {StorageKeys} from "../../../shared/enums/storage";
+import { StorageService } from '../../../core/services/storage/storage.service'
+import { StorageKeys } from '../../../shared/enums/storage'
 import {
   getMockCurrentTime,
   getMockLoginDate,
   getMockReferenceDate,
   getMockTasks
-} from "../components/progress-report-chart/mock-tasks";
-import {LocalizationService} from "../../../core/services/misc/localization.service";
-import {DefaultProgressConfig} from "../../../../assets/data/defaultConfig";
+} from '../components/progress-report-chart/mock-tasks'
+import { LocalizationService } from '../../../core/services/misc/localization.service'
+import { DefaultProgressConfig } from '../../../../assets/data/defaultConfig'
 
 @Injectable()
 export class ProgressReportService {
@@ -22,14 +22,26 @@ export class ProgressReportService {
     this.testMode = !!DefaultProgressConfig.test_mode
   }
 
-  getChartTasks(){
+  getChartTasks() {
     return Promise.all([
-      this.testMode ? getMockTasks() : this.storageService.get(StorageKeys.SCHEDULE_TASKS),
-      this.testMode ? getMockReferenceDate() : this.storageService.get(StorageKeys.REFERENCEDATE),
-      this.testMode ? getMockLoginDate() : this.storageService.get(StorageKeys.LOGINDATE)
+      this.testMode
+        ? getMockTasks()
+        : this.storageService.get(StorageKeys.SCHEDULE_TASKS),
+      this.testMode
+        ? getMockReferenceDate()
+        : this.storageService.get(StorageKeys.REFERENCEDATE),
+      this.testMode
+        ? getMockLoginDate()
+        : this.storageService.get(StorageKeys.LOGINDATE)
     ]).then(([tasks, referenceDate, loginDate]) => {
-      const {weeklyData, firstReportAvailableDate} =
-        this.categorizeAndCalculateCompletionPerWeek(tasks, loginDate, referenceDate)
+      const {
+        weeklyData,
+        firstReportAvailableDate
+      } = this.categorizeAndCalculateCompletionPerWeek(
+        tasks,
+        loginDate,
+        referenceDate
+      )
       return {
         weeklyData,
         referenceDate,
@@ -38,13 +50,21 @@ export class ProgressReportService {
     })
   }
 
-  private categorizeAndCalculateCompletionPerWeek(tasks, loginDate, referenceDate){
+  private categorizeAndCalculateCompletionPerWeek(
+    tasks,
+    loginDate,
+    referenceDate
+  ) {
     const sortedTasks = this.sortByTimestampDescendant(tasks)
-    if(sortedTasks.length < 1 ){
+    if (sortedTasks.length < 1) {
       return
     }
     const categorizedTasks = this.categorizePerWeek(sortedTasks, referenceDate)
-    return this.calculateCompletionPerWeek(categorizedTasks, loginDate, referenceDate)
+    return this.calculateCompletionPerWeek(
+      categorizedTasks,
+      loginDate,
+      referenceDate
+    )
   }
 
   private categorizePerWeek(tasks, referenceDate) {
@@ -86,47 +106,57 @@ export class ProgressReportService {
         let numberOfCompletedTasks = 0
         let lastTaskOfWeekAvailableAt = null
         tasks[key].map(task => {
-          if(task.timestamp < moment(loginDate).startOf('week').valueOf()) return
+          if (task.timestamp < moment(loginDate).startOf('week').valueOf())
+            return
           lastTaskOfWeekAvailableAt = task.timestamp + task.completionWindow
           if (task.completed == true) {
             numberOfPassedTasks++
             numberOfCompletedTasks++
-          } else if (task.timestamp + task.completionWindow < this.getCurrentDate()) {
+          } else if (
+            task.timestamp + task.completionWindow <
+            this.getCurrentDate()
+          ) {
             numberOfPassedTasks++
           }
         })
         if (!firstReportAvailableDate) {
-          firstReportAvailableDate = (tasks[key].length > 0 && tasks[key].length == numberOfPassedTasks) ? 1 :
-            lastTaskOfWeekAvailableAt
+          firstReportAvailableDate =
+            tasks[key].length > 0 && tasks[key].length == numberOfPassedTasks
+              ? 1
+              : lastTaskOfWeekAvailableAt
         }
 
         weeklyData[weekNumber] = {
           total: tasks[key].length,
           numberOfPassedTasks: numberOfPassedTasks,
-          numberOfCompletedTasks: numberOfCompletedTasks,
+          numberOfCompletedTasks: numberOfCompletedTasks
         }
       }
     }
-    return {weeklyData, firstReportAvailableDate}
+    return { weeklyData, firstReportAvailableDate }
   }
 
   protected sortByTimestampDescendant(tasks) {
-    return tasks.sort((a, b) => a.timestamp > b.timestamp ? 1 : -1)
+    return tasks.sort((a, b) => (a.timestamp > b.timestamp ? 1 : -1))
   }
 
-  getCurrentDate(){
+  getCurrentDate() {
     return this.testMode ? getMockCurrentTime() : moment()
   }
 
-  getWeekNumber(date, referenceDate){
-    return (Math.round(moment.duration(moment(parseInt(date)).diff(referenceDate)).asWeeks()) + 1).toString()
+  getWeekNumber(date, referenceDate) {
+    return (
+      Math.round(
+        moment.duration(moment(parseInt(date)).diff(referenceDate)).asWeeks()
+      ) + 1
+    ).toString()
   }
 
-  changeStartOfWeek(referenceDate){
+  changeStartOfWeek(referenceDate) {
     moment.updateLocale(this.localizationService.getLanguage().value, {
       week: {
         dow: moment(referenceDate).weekday(),
-        doy: 7 + moment(referenceDate).weekday() - 1,
+        doy: 7 + moment(referenceDate).weekday() - 1
       }
     })
   }

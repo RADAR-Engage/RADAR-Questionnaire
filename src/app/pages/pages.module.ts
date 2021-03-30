@@ -34,7 +34,7 @@ import { QuestionsModule } from './questions/questions.module'
 import { ReportModule } from './report/report.module'
 import { SettingsModule } from './settings/settings.module'
 import { SplashModule } from './splash/splash.module'
-import {ProgressReportModule} from "./progress-report/progress-report.module";
+import { ProgressReportModule } from './progress-report/progress-report.module'
 
 @NgModule({
   imports: [

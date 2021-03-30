@@ -23,7 +23,9 @@ export class ConfigKeys {
   )
   static SCHEDULE_YEAR_COVERAGE = new ConfigKeys('schedule_year_coverage')
 
-  static PROGRESS_REPORT_DESCRIPTION = new ConfigKeys('progress_report_description')
+  static PROGRESS_REPORT_DESCRIPTION = new ConfigKeys(
+    'progress_report_description'
+  )
   static PROGRESS_REPORT_ENABLED = new ConfigKeys('progress_report_enabled')
 
   constructor(public value: string) {}

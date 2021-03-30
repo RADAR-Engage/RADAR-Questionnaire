@@ -12,7 +12,7 @@ import { LocalizationService } from '../../../../../core/services/misc/localizat
 
 @Component({
   selector: 'text-input',
-  templateUrl: 'text-input.component.html',
+  templateUrl: 'text-input.component.html'
 })
 export class TextInputComponent implements OnInit {
   @ViewChild('content') content
@@ -45,7 +45,7 @@ export class TextInputComponent implements OnInit {
     hour: 'Hour',
     minute: 'Minute',
     second: 'Second',
-    ampm: 'AM/PM',
+    ampm: 'AM/PM'
   }
 
   value = {}

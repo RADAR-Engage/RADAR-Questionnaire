@@ -277,4 +277,3 @@ export const DefaultProgressConfig = {
   enabled: 'true',
   test_mode: false
 }
-

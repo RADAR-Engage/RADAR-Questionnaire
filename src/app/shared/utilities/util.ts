@@ -28,30 +28,29 @@ export class Utility {
   }
 
   deepCopy(o) {
-    let newO,
-      i;
+    let newO, i
 
     if (typeof o !== 'object') {
-      return o;
+      return o
     }
     if (!o) {
-      return o;
+      return o
     }
 
     if ('[object Array]' === Object.prototype.toString.apply(o)) {
-      newO = [];
+      newO = []
       for (i = 0; i < o.length; i += 1) {
-        newO[i] = this.deepCopy(o[i]);
+        newO[i] = this.deepCopy(o[i])
       }
-      return newO;
+      return newO
     }
 
-    newO = {};
+    newO = {}
     for (i in o) {
       if (o.hasOwnProperty(i)) {
-        newO[i] = this.deepCopy(o[i]);
+        newO[i] = this.deepCopy(o[i])
       }
     }
-    return newO;
+    return newO
   }
 }

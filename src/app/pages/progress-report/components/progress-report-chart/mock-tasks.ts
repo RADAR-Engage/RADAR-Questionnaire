@@ -1,28 +1,28 @@
 import * as moment from 'moment'
 
-const currentTime = "2021-03-25 08:00"
+const currentTime = '2021-03-25 08:00'
 
-const loginDate = "2021-03-23 08:45"
+const loginDate = '2021-03-23 08:45'
 
-const referenceDate = "2021-03-23 00:00"
+const referenceDate = '2021-03-23 00:00'
 
 const mockTasks = [
   {
     name: 'PHQ8',
     completionWindow: 86400000,
     repeatedQuestionnaires: [
-      {date: "2021-03-23 09:30", completed: false},
-      {date: "2021-03-30 09:30", completed: false},
-      {date: "2021-04-06 09:30", completed: false},
-      {date: "2021-04-13 09:30", completed: false},
-      {date: "2021-04-20 09:30", completed: false},
-      {date: "2021-04-27 09:30", completed: false},
-      {date: "2021-05-04 09:30", completed: false},
-      {date: "2021-05-11 09:30", completed: false},
-      {date: "2021-05-18 09:30", completed: false},
-      {date: "2021-05-25 09:30", completed: false},
-      {date: "2021-06-01 09:30", completed: false},
-      {date: "2021-06-08 09:30", completed: false},
+      { date: '2021-03-23 09:30', completed: false },
+      { date: '2021-03-30 09:30', completed: false },
+      { date: '2021-04-06 09:30', completed: false },
+      { date: '2021-04-13 09:30', completed: false },
+      { date: '2021-04-20 09:30', completed: false },
+      { date: '2021-04-27 09:30', completed: false },
+      { date: '2021-05-04 09:30', completed: false },
+      { date: '2021-05-11 09:30', completed: false },
+      { date: '2021-05-18 09:30', completed: false },
+      { date: '2021-05-25 09:30', completed: false },
+      { date: '2021-06-01 09:30', completed: false },
+      { date: '2021-06-08 09:30', completed: false }
     ]
   },
   {
@@ -63,8 +63,7 @@ const mockTasks = [
   }
 ]
 
-
-const createTasksFromMockTasks = (()=>{
+const createTasksFromMockTasks = () => {
   const result = []
   mockTasks.forEach(task => {
     task.repeatedQuestionnaires.forEach(questionnaire => {
@@ -77,28 +76,26 @@ const createTasksFromMockTasks = (()=>{
     })
   })
   return result
-})
+}
 
-export const getMockReferenceDate = (() => {
-  return new Promise((resolve , reject) => {
+export const getMockReferenceDate = () => {
+  return new Promise((resolve, reject) => {
     resolve(moment(referenceDate).valueOf())
-  });
-})
+  })
+}
 
-export const getMockLoginDate = (() => {
-  return new Promise((resolve , reject) => {
+export const getMockLoginDate = () => {
+  return new Promise((resolve, reject) => {
     resolve(moment(loginDate).valueOf())
-  });
-})
+  })
+}
 
-export const getMockTasks = (() => {
-  return new Promise((resolve , reject) => {
+export const getMockTasks = () => {
+  return new Promise((resolve, reject) => {
     resolve(createTasksFromMockTasks())
-  });
-})
+  })
+}
 
-export const getMockCurrentTime = (() => {
+export const getMockCurrentTime = () => {
   return moment(currentTime)
-})
-
-
+}

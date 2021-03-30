@@ -5,11 +5,8 @@ export function parseVersion(data) {
   // TODO: Add support for iOS
   const playstorePattern = /<span class="htlgb">([0-9]*[.][0-9]*[.][0-9]*)<\/span>/g
   const versionPattern = /([0-9]*[.][0-9]*[.][0-9]*)/
-  return data
-    .match(playstorePattern)
-    .toString()
-    .match(versionPattern)[0]
-  }
+  return data.match(playstorePattern).toString().match(versionPattern)[0]
+}
 
 // NOTE: Parses and evaluates the branching logic
 // Example: '[esm_social_interact(1)] = \"1\" or' or '[esm_social] = '1'' to 'esm_social_interact[1] == "1" ||'
@@ -43,7 +40,7 @@ export function parseAndEvalLogic(logic: string, answers): string {
       Object.assign(parsedAnswers, { [fieldName]: values })
     } else Object.assign(parsedAnswers, { [fieldName]: answer })
   })
-  
+
   // Evalute logic with answers
   return compiled.eval(parsedAnswers)
 }

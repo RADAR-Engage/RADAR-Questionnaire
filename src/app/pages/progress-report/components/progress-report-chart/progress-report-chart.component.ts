@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import * as moment from 'moment'
-import {ChartOptions} from "../../models/chart";
-import {chart, lineColors, marker, markerColors} from "./chart-styles";
-import {ProgressReportService} from "../../services/progress-report.service";
-import {LocKeys} from "../../../../shared/enums/localisations";
-import {LocalizationService} from "../../../../core/services/misc/localization.service";
+import { ChartOptions } from '../../models/chart'
+import { chart, lineColors, marker, markerColors } from './chart-styles'
+import { ProgressReportService } from '../../services/progress-report.service'
+import { LocKeys } from '../../../../shared/enums/localisations'
+import { LocalizationService } from '../../../../core/services/misc/localization.service'
 
 @Component({
   selector: 'progress-report-chart',
-  templateUrl: 'progress-report-chart.component.html',
+  templateUrl: 'progress-report-chart.component.html'
 })
 export class ProgressReportChartComponent implements OnInit {
   @Input()
@@ -21,7 +21,7 @@ export class ProgressReportChartComponent implements OnInit {
   showNoResult: boolean = false
   xAxisTitle: string = chart.xAxisTitle
 
-  public chartOptions: Partial<ChartOptions>;
+  public chartOptions: Partial<ChartOptions>
 
   constructor(
     private localization: LocalizationService,
@@ -29,21 +29,26 @@ export class ProgressReportChartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const {weeklyData, referenceDate, firstReportAvailableDate} = this.data
+    const { weeklyData, referenceDate, firstReportAvailableDate } = this.data
     this.showNoResult = !weeklyData
-    this.firstReportAvailableDate = this.getFirstReportAvailableText(firstReportAvailableDate)
-    this.showWaitingForFirstReport = firstReportAvailableDate > this.progressReport.getCurrentDate().valueOf()
+    this.firstReportAvailableDate = this.getFirstReportAvailableText(
+      firstReportAvailableDate
+    )
+    this.showWaitingForFirstReport =
+      firstReportAvailableDate > this.progressReport.getCurrentDate().valueOf()
     this.referenceDate = referenceDate
     this.chartData = this.convertWeeklyDataToChartData(weeklyData)
     this.initCharts()
   }
 
-  private convertWeeklyDataToChartData(weeklyData){
+  private convertWeeklyDataToChartData(weeklyData) {
     const output = []
     const data = []
     for (const key in weeklyData) {
-      if(weeklyData.hasOwnProperty(key)){
-        const completionPercentage = this.calculateAndRoundCompletionPercentage(weeklyData[key])
+      if (weeklyData.hasOwnProperty(key)) {
+        const completionPercentage = this.calculateAndRoundCompletionPercentage(
+          weeklyData[key]
+        )
         data.push({
           x: key,
           y: completionPercentage,
@@ -51,61 +56,73 @@ export class ProgressReportChartComponent implements OnInit {
         })
       }
     }
-    output.push({data: data})
+    output.push({ data: data })
     return output
   }
 
-  protected calculateAndRoundCompletionPercentage(item){
+  protected calculateAndRoundCompletionPercentage(item) {
     let result = null
-    if(item.total > 0 && item.total == item.numberOfPassedTasks){
-      result = 100 * item.numberOfCompletedTasks / item.total
-      if(result != 0 && result != 100){
+    if (item.total > 0 && item.total == item.numberOfPassedTasks) {
+      result = (100 * item.numberOfCompletedTasks) / item.total
+      if (result != 0 && result != 100) {
         result = 50
       }
     }
     return result
   }
 
-  private calculateWidth(){
-    if(!this.chartData[0]){
-      return "100%"
+  private calculateWidth() {
+    if (!this.chartData[0]) {
+      return '100%'
     }
     const numberOfItems = this.chartData[0].data.length
-    return numberOfItems > chart.xAxisMaxNumberOfItem ? numberOfItems * 100 / chart.xAxisMaxNumberOfItem + '%' : '100%'
+    return numberOfItems > chart.xAxisMaxNumberOfItem
+      ? (numberOfItems * 100) / chart.xAxisMaxNumberOfItem + '%'
+      : '100%'
   }
 
   private getFirstReportAvailableText(date: number) {
-    let result = this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING) + " " +
+    let result =
+      this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING) +
+      ' ' +
       moment(date).format('MMM DD, YYYY HH:mm')
-    const diff = this.progressReport.getCurrentDate().startOf('day')
+    const diff = this.progressReport
+      .getCurrentDate()
+      .startOf('day')
       .diff(moment(date).startOf('day'), 'days')
-    if(diff == 0){
-      result = this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING_TODAY) + " " +
+    if (diff == 0) {
+      result =
+        this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING_TODAY) +
+        ' ' +
         moment(date).format('HH:mm')
-    }else if(diff == -1){
-      result = this.localization.translateKey(LocKeys.PROGRESS_REPORT_WAITING_TOMORROW) + " " +
+    } else if (diff == -1) {
+      result =
+        this.localization.translateKey(
+          LocKeys.PROGRESS_REPORT_WAITING_TOMORROW
+        ) +
+        ' ' +
         moment(date).format('HH:mm')
     }
     return result
   }
 
-  private initCharts(){
+  private initCharts() {
     this.chartOptions = {
       series: this.chartData,
       chart: {
-        id: "report-chart",
-        type: "area",
+        id: 'report-chart',
+        type: 'area',
         height: chart.height,
         width: this.calculateWidth(),
         toolbar: {
-          show: false,
+          show: false
         },
         foreColor: chart.foreColor,
-        fontFamily: chart.fontFamily,
+        fontFamily: chart.fontFamily
       },
       colors: lineColors,
       stroke: {
-        curve: "straight"
+        curve: 'straight'
       },
       dataLabels: {
         enabled: false
@@ -113,13 +130,13 @@ export class ProgressReportChartComponent implements OnInit {
       fill: {
         opacity: 1
       },
-      markers: {...marker, strokeOpacity: 1},
+      markers: { ...marker, strokeOpacity: 1 },
       xaxis: {
         type: 'category',
         labels: {
           show: true,
-          rotate: -45,
-        },
+          rotate: -45
+        }
       },
       yaxis: {
         min: 0,
@@ -129,17 +146,17 @@ export class ProgressReportChartComponent implements OnInit {
           show: true,
           rotate: 0,
           minWidth: 40,
-          formatter: function(val) {
-            return val == 100 ? 'Full' : (val == 50 ? 'Half' : '')
-          },
+          formatter: function (val) {
+            return val == 100 ? 'Full' : val == 50 ? 'Half' : ''
+          }
         },
         title: {
-          text: chart.yAxisTitle,
-        },
+          text: chart.yAxisTitle
+        }
       },
       tooltip: {
-        enabled: false,
-      },
+        enabled: false
+      }
     }
   }
 }

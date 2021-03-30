@@ -16,8 +16,8 @@ import { SettingsPageComponent } from '../../settings/containers/settings-page.c
 import { SplashPageComponent } from '../../splash/containers/splash-page.component'
 import { TasksService } from '../services/tasks.service'
 import { HomePageAnimations } from './home-page.animation'
-import {ProgressReportPageComponent} from "../../progress-report/containers/progress-report-page.component";
-import {ProgressReportConfigService} from "../../progress-report/services/progress-report-config.service";
+import { ProgressReportPageComponent } from '../../progress-report/containers/progress-report-page.component'
+import { ProgressReportConfigService } from '../../progress-report/services/progress-report-config.service'
 
 @Component({
   selector: 'page-home',
@@ -102,9 +102,11 @@ export class HomePageComponent implements OnDestroy {
     this.title = this.tasksService.getPlatformInstanceName()
     this.onDemandIcon = this.tasksService.getOnDemandAssessmentIcon()
     this.showMiscTasksButton = this.getShowMiscTasksButton()
-    this.progressReportConfigService.getProgressReportEnabled().then((enabled) => {
-      this.progressReportEnabled = enabled
-    })
+    this.progressReportConfigService
+      .getProgressReportEnabled()
+      .then(enabled => {
+        this.progressReportEnabled = enabled
+      })
   }
 
   onResume() {
@@ -205,7 +207,7 @@ export class HomePageComponent implements OnDestroy {
     )
   }
 
-  showProgressReportPage(){
+  showProgressReportPage() {
     this.navCtrl.push(ProgressReportPageComponent)
     this.usage.sendClickEvent('open_progress_page')
   }

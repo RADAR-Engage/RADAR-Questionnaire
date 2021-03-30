@@ -65,7 +65,7 @@ export class SubjectConfigService {
     return this.storage.set(this.SUBJECT_CONFIG_STORE.ENROLMENTDATE, date)
   }
 
-  setLoginDate(date){
+  setLoginDate(date) {
     return this.storage.set(this.SUBJECT_CONFIG_STORE.LOGINDATE, date)
   }
 
