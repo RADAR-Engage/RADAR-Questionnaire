@@ -8,21 +8,25 @@ import {
   getMockReferenceDate,
   getMockTasks
 } from "../components/progress-report-chart/mock-tasks";
-
-const TEST_PROGRESS_REPORT = false
+import {LocalizationService} from "../../../core/services/misc/localization.service";
+import {DefaultProgressConfig} from "../../../../assets/data/defaultConfig";
 
 @Injectable()
 export class ProgressReportService {
+  testMode: boolean = false
 
   constructor(
     private storageService: StorageService,
-  ) {}
+    private localizationService: LocalizationService
+  ) {
+    this.testMode = !!DefaultProgressConfig.test_mode
+  }
 
   getChartTasks(){
     return Promise.all([
-      TEST_PROGRESS_REPORT ? getMockTasks() : this.storageService.get(StorageKeys.SCHEDULE_TASKS),
-      TEST_PROGRESS_REPORT ? getMockReferenceDate() : this.storageService.get(StorageKeys.REFERENCEDATE),
-      TEST_PROGRESS_REPORT ? getMockLoginDate() : this.storageService.get(StorageKeys.LOGINDATE)
+      this.testMode ? getMockTasks() : this.storageService.get(StorageKeys.SCHEDULE_TASKS),
+      this.testMode ? getMockReferenceDate() : this.storageService.get(StorageKeys.REFERENCEDATE),
+      this.testMode ? getMockLoginDate() : this.storageService.get(StorageKeys.LOGINDATE)
     ]).then(([tasks, referenceDate, loginDate]) => {
       const {weeklyData, firstReportAvailableDate} =
         this.categorizeAndCalculateCompletionPerWeek(tasks, loginDate, referenceDate)
@@ -44,14 +48,10 @@ export class ProgressReportService {
   }
 
   private categorizePerWeek(tasks, referenceDate) {
-    moment.updateLocale('en', {
-      week: {
-        dow: moment(referenceDate).weekday(),
-        doy: 7 + moment(referenceDate).weekday() - 1,
-      }
-    })
-
     let categorizedTasks = {}
+
+    this.changeStartOfWeek(referenceDate)
+
     const protocolStartDate = moment(referenceDate)
     const lastTask = tasks[tasks.length - 1]
     const protocolEndDate = moment(lastTask.timestamp)
@@ -74,21 +74,14 @@ export class ProgressReportService {
   }
 
   private calculateCompletionPerWeek(tasks, loginDate, referenceDate) {
-
-    moment.updateLocale('en', {
-      week: {
-        dow: moment(referenceDate).weekday(),
-        doy: 7 + moment(referenceDate).weekday() - 1,
-      }
-    })
-
     const weeklyData = {}
     let firstReportAvailableDate = null
+
+    this.changeStartOfWeek(referenceDate)
+
     for (const key in tasks) {
       if (tasks.hasOwnProperty(key)) {
-        const weekNumber = (Math.round(moment.duration(moment(parseInt(key))
-          .diff(referenceDate)).asWeeks()) + 1)
-          .toString()
+        const weekNumber = this.getWeekNumber(key, referenceDate)
         let numberOfPassedTasks = 0
         let numberOfCompletedTasks = 0
         let lastTaskOfWeekAvailableAt = null
@@ -122,6 +115,19 @@ export class ProgressReportService {
   }
 
   getCurrentDate(){
-    return TEST_PROGRESS_REPORT ? getMockCurrentTime() : moment()
+    return this.testMode ? getMockCurrentTime() : moment()
+  }
+
+  getWeekNumber(date, referenceDate){
+    return (Math.round(moment.duration(moment(parseInt(date)).diff(referenceDate)).asWeeks()) + 1).toString()
+  }
+
+  changeStartOfWeek(referenceDate){
+    moment.updateLocale(this.localizationService.getLanguage().value, {
+      week: {
+        dow: moment(referenceDate).weekday(),
+        doy: 7 + moment(referenceDate).weekday() - 1,
+      }
+    })
   }
 }
