@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 import { NavController } from 'ionic-angular'
 import {StorageService} from "../../../core/services/storage/storage.service";
 import {LogService} from "../../../core/services/misc/log.service";
@@ -10,7 +10,7 @@ import {ProgressReportConfigService} from "../services/progress-report-config.se
   selector: 'page-progress-report',
   templateUrl: 'progress-report-page.component.html'
 })
-export class ProgressReportPageComponent implements OnInit, OnDestroy{
+export class ProgressReportPageComponent implements OnInit{
 
   chartTasks: any
   progressReportDescription: string
@@ -25,7 +25,6 @@ export class ProgressReportPageComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(){
-    console.log(this.constructor.name)
     this.usage.setPage(this.constructor.name)
     Promise.all([
       this.progressConfigService.getProgressReportDescription(),
@@ -40,14 +39,4 @@ export class ProgressReportPageComponent implements OnInit, OnDestroy{
       throw this.logger.error('Failed to fetch Firebase config', error)
     })
   }
-
-  ngOnDestroy() {
-    console.log("destroyed")
-  }
-
-  ionViewDidLoad() {}
-
-  ionViewDidEnter() {}
-
-
 }
