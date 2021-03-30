@@ -51,7 +51,7 @@ export class ProgressReportChartComponent implements OnInit {
         })
       }
     }
-    output.push({name: 'result', data: data})
+    output.push({data: data})
     return output
   }
 
