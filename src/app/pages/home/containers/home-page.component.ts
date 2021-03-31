@@ -11,13 +11,13 @@ import { Task, TasksProgress } from '../../../shared/models/task'
 import { checkTaskIsNow } from '../../../shared/utilities/check-task-is-now'
 import { ClinicalTasksPageComponent } from '../../clinical-tasks/containers/clinical-tasks-page.component'
 import { OnDemandPageComponent } from '../../on-demand/containers/on-demand-page.component'
+import { ProgressReportPageComponent } from '../../progress-report/containers/progress-report-page.component'
+import { ProgressReportConfigService } from '../../progress-report/services/progress-report-config.service'
 import { QuestionsPageComponent } from '../../questions/containers/questions-page.component'
 import { SettingsPageComponent } from '../../settings/containers/settings-page.component'
 import { SplashPageComponent } from '../../splash/containers/splash-page.component'
 import { TasksService } from '../services/tasks.service'
 import { HomePageAnimations } from './home-page.animation'
-import { ProgressReportPageComponent } from '../../progress-report/containers/progress-report-page.component'
-import { ProgressReportConfigService } from '../../progress-report/services/progress-report-config.service'
 
 @Component({
   selector: 'page-home',
@@ -45,6 +45,8 @@ export class HomePageComponent implements OnDestroy {
   showMiscTasksButton: Promise<boolean>
 
   progressReportEnabled = false
+  APP_CREDITS = '&#169; RADAR-Base'
+  HTML_BREAK = '<br>'
 
   constructor(
     public navCtrl: NavController,
@@ -174,16 +176,25 @@ export class HomePageComponent implements OnDestroy {
 
   showCredits() {
     this.usage.sendClickEvent('show_credits')
-    return this.alertService.showAlert({
-      title: this.localization.translateKey(LocKeys.CREDITS_TITLE),
-      message: this.localization.translateKey(LocKeys.CREDITS_BODY),
-      buttons: [
-        {
-          text: this.localization.translateKey(LocKeys.BTN_OKAY),
-          handler: () => {}
-        }
-      ]
-    })
+    return Promise.all([
+      this.tasksService.getAppCreditsTitle(),
+      this.tasksService.getAppCreditsBody()
+    ]).then(([title, body]) =>
+      this.alertService.showAlert({
+        title: this.localization.chooseText(title),
+        message:
+          this.localization.chooseText(body) +
+          this.HTML_BREAK +
+          this.HTML_BREAK +
+          this.APP_CREDITS,
+        buttons: [
+          {
+            text: this.localization.translateKey(LocKeys.BTN_OKAY),
+            handler: () => {}
+          }
+        ]
+      })
+    )
   }
 
   showMissedInfo() {

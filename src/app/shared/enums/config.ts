@@ -27,6 +27,8 @@ export class ConfigKeys {
     'progress_report_description'
   )
   static PROGRESS_REPORT_ENABLED = new ConfigKeys('progress_report_enabled')
+  static APP_CREDITS_TITLE = new ConfigKeys('app_credits_title')
+  static APP_CREDITS_BODY = new ConfigKeys('app_credits_body')
 
   constructor(public value: string) {}
 
