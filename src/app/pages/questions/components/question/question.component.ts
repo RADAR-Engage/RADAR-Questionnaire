@@ -5,7 +5,7 @@ import {
   OnChanges,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core'
 import { Dialogs } from '@ionic-native/dialogs/ngx'
 import { Vibration } from '@ionic-native/vibration/ngx'
@@ -17,7 +17,7 @@ import { Question, QuestionType } from '../../../../shared/models/question'
 
 @Component({
   selector: 'question',
-  templateUrl: 'question.component.html',
+  templateUrl: 'question.component.html'
 })
 export class QuestionComponent implements OnInit, OnChanges {
   @ViewChild('content') content
@@ -46,7 +46,7 @@ export class QuestionComponent implements OnInit, OnChanges {
     QuestionType.timed,
     QuestionType.audio,
     QuestionType.info,
-    QuestionType.text,
+    QuestionType.text
   ])
   HIDE_FIELD_LABEL_SET: Set<QuestionType> = new Set([QuestionType.audio])
 
