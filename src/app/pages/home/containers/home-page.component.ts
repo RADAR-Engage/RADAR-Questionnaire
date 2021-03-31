@@ -11,6 +11,8 @@ import { Task, TasksProgress } from '../../../shared/models/task'
 import { checkTaskIsNow } from '../../../shared/utilities/check-task-is-now'
 import { ClinicalTasksPageComponent } from '../../clinical-tasks/containers/clinical-tasks-page.component'
 import { OnDemandPageComponent } from '../../on-demand/containers/on-demand-page.component'
+import { ProgressReportPageComponent } from '../../progress-report/containers/progress-report-page.component'
+import { ProgressReportConfigService } from '../../progress-report/services/progress-report-config.service'
 import { QuestionsPageComponent } from '../../questions/containers/questions-page.component'
 import { SettingsPageComponent } from '../../settings/containers/settings-page.component'
 import { SplashPageComponent } from '../../splash/containers/splash-page.component'
@@ -42,6 +44,7 @@ export class HomePageComponent implements OnDestroy {
   checkTaskInterval
   showMiscTasksButton: Promise<boolean>
 
+  progressReportEnabled = false
   APP_CREDITS = '&#169; RADAR-Base'
   HTML_BREAK = '<br>'
 
@@ -51,7 +54,8 @@ export class HomePageComponent implements OnDestroy {
     private tasksService: TasksService,
     private localization: LocalizationService,
     private platform: Platform,
-    private usage: UsageService
+    private usage: UsageService,
+    private progressReportConfigService: ProgressReportConfigService
   ) {
     this.resumeListener = this.platform.resume.subscribe(() => this.onResume())
   }
@@ -100,6 +104,11 @@ export class HomePageComponent implements OnDestroy {
     this.title = this.tasksService.getPlatformInstanceName()
     this.onDemandIcon = this.tasksService.getOnDemandAssessmentIcon()
     this.showMiscTasksButton = this.getShowMiscTasksButton()
+    this.progressReportConfigService
+      .getProgressReportEnabled()
+      .then(enabled => {
+        this.progressReportEnabled = enabled
+      })
   }
 
   onResume() {
@@ -207,5 +216,10 @@ export class HomePageComponent implements OnDestroy {
     return Promise.all([this.hasOnDemandTasks, this.hasClinicalTasks]).then(
       ([onDemand, clinical]) => onDemand || clinical
     )
+  }
+
+  showProgressReportPage() {
+    this.navCtrl.push(ProgressReportPageComponent)
+    this.usage.sendClickEvent('open_progress_page')
   }
 }

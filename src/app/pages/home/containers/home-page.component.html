@@ -24,6 +24,18 @@
     >
     </task-progress>
   </div>
+  <div class="progress-report-container" *ngIf="progressReportEnabled">
+    <ion-fab
+      left
+      bottom
+      class="progress-report-button"
+      [class.clinical-button-bottom]="showCalendar"
+    >
+      <button ion-fab class="fab" (click)="showProgressReportPage()">
+        <img src="assets/imgs/bar-chart-sharp.svg" class="icon" alt="progress-report" />
+      </button>
+    </ion-fab>
+  </div>
 
   <div class="clinical-container" *ngIf="showMiscTasksButton | async">
     <ion-fab

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'PROGRESS_REPORT_TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="loading">
+    <div class="spinner-wrapper">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!loading">
+    <progress-report-chart [data]="chartTasks"></progress-report-chart>
+    <div class="progress-description-wrapper">
+      <p>{{progressReportDescription}}</p>
+    </div>
+  </ng-container>
+</ion-content>

@@ -92,6 +92,22 @@ page-home {
     height: 32px;
   }
 
+  .progress-report-container {
+    position: relative;
+  }
+
+  .progress-report-button {
+    position: absolute;
+    bottom: 20px;
+    z-index: 10;
+
+    .fab {
+      .icon {
+        margin: 10px;
+      }
+    }
+  }
+
   .hidden {
     display: none;
   }

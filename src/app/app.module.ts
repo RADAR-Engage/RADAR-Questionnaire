@@ -44,7 +44,7 @@ import { Utility } from './shared/utilities/util'
       mode: 'md',
       activator: 'none',
       scrollAssist: false,
-      autoFocusAssist: false,
+      autoFocusAssist: false
     }),
     IonicStorageModule.forRoot({
       name: '__appdb',
@@ -82,7 +82,7 @@ import { Utility } from './shared/utilities/util'
     FirebaseX,
     LocalNotifications,
     LogService,
-    { provide: RemoteConfigService, useClass: FirebaseRemoteConfigService },
+    { provide: RemoteConfigService, useClass: FirebaseRemoteConfigService }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

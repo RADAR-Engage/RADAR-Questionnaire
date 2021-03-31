@@ -179,6 +179,16 @@ export class LocKeys {
 
   static PLACEHOLDER_TEXT_INPUT = new LocKeys('PLACEHOLDER_TEXT_INPUT')
 
+  static PROGRESS_REPORT_TITLE = new LocKeys('PROGRESS_REPORT_TITLE')
+  static PROGRESS_REPORT_NO_RESULT = new LocKeys('PROGRESS_REPORT_NO_RESULT')
+  static PROGRESS_REPORT_WAITING = new LocKeys('PROGRESS_REPORT_WAITING')
+  static PROGRESS_REPORT_WAITING_TODAY = new LocKeys(
+    'PROGRESS_REPORT_WAITING_TODAY'
+  )
+  static PROGRESS_REPORT_WAITING_TOMORROW = new LocKeys(
+    'PROGRESS_REPORT_WAITING_TOMORROW'
+  )
+
   constructor(public value: string) {}
 
   toString() {

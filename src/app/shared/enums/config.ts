@@ -23,6 +23,10 @@ export class ConfigKeys {
   )
   static SCHEDULE_YEAR_COVERAGE = new ConfigKeys('schedule_year_coverage')
 
+  static PROGRESS_REPORT_DESCRIPTION = new ConfigKeys(
+    'progress_report_description'
+  )
+  static PROGRESS_REPORT_ENABLED = new ConfigKeys('progress_report_enabled')
   static APP_CREDITS_TITLE = new ConfigKeys('app_credits_title')
   static APP_CREDITS_BODY = new ConfigKeys('app_credits_body')
 

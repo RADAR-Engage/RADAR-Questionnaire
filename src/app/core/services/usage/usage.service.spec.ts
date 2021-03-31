@@ -10,7 +10,7 @@ import {
 import { KafkaService } from '../kafka/kafka.service'
 import { LogService } from '../misc/log.service'
 import { UsageService } from './usage.service'
-import { AnalyticsService } from './analytics.service';
+import { AnalyticsService } from './analytics.service'
 
 describe('UsageService', () => {
   let service
