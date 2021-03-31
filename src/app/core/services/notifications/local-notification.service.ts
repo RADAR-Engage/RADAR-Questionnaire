@@ -102,4 +102,8 @@ export class LocalNotificationService extends NotificationService {
       this.format(this.notifications.createTestNotification())
     )
   }
+
+  unregisterFromNotificataions(): Promise<any> {
+    return Promise.resolve('Method not available for notification type.')
+  }
 }
